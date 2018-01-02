@@ -11,7 +11,7 @@ import 'element-ui/lib/theme-default/index.css'
 Vue.use(ElementUI)
 
 var instance = Axios.create({
-  baseURL: 'http://localhost:3000/'
+  baseURL: 'http://106.14.205.89:8080/'
 });
 
 Vue.config.productionTip = false;
