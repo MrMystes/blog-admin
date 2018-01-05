@@ -49,7 +49,7 @@
         </el-table-column>
         <el-table-column label="操作" width="140">
           <template scope="scope">
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑
+            <el-button size="small" @click="handleSubmit(scope.row.uniqueId)">发布
             </el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.row.uniqueId)">删除
             </el-button>
@@ -81,7 +81,9 @@
     methods: {
       refresh() {
         let getPosts = () => {
-          return this.$http.get(`/posts?offset=${this.currentPage - 1}&limit=${this.limit}&fields=title,createAt,lastUpdate,readCount,tag,status,description,uniqueId`);
+          return this.$http.get(
+            `/posts?offset=${this.currentPage - 1}&limit=${this.limit}&fields=title,createAt,lastUpdate,readCount,tag,status,description,uniqueId`
+          );
         }
         let getPostsCount = () => {
           return this.$http.get('/posts/id')
@@ -108,19 +110,19 @@
           type: 'warning'
         }).then(
           () => {
-            this.$http.delete(`/posts/id/${postId}`).then(res => {
-                //刷新本页数据
-                this.refresh();
-                this.$message({
-                  type: 'success',
-                  message: res.statusText
-                });
-              }).catch(err=>{
-                this.$message({
-                  type: 'warning',
-                  message: err.res.statusText
-                });
-              })
+            this.$http.delete(`/posts/${postId}`).then(res => {
+              //刷新本页数据
+              this.refresh();
+              this.$message({
+                type: 'success',
+                message: res.statusText
+              });
+            }).catch(err => {
+              this.$message({
+                type: 'warning',
+                message: err.res.statusText
+              });
+            })
           },
           () => {
             this.$message({
@@ -152,6 +154,23 @@
               })
             }
           )
+      },
+      handleSubmit(postId) {
+        let now = new Date()
+        let modify = {
+          status: 0,
+          lastUpdate: String(now.getTime())
+        }
+        this.$http.put(`/posts/${postId}`,modify)
+          .then(res=>{
+          if(res.status === 200){
+            this.$message.success(res.statusText)
+            this.refresh();
+          }
+        }).catch(err=>{
+          console.log(err)
+          this.$message.warning(err.res.statusText)
+        })
       }
     },
     mounted() {

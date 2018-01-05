@@ -74,8 +74,9 @@
           url: '/posts/',
           data: msgCopy
         }).then(res=>{
-          if(res.status === 200 && res.statusText === 'OK'){
-            this.$message.success('上传成功')
+          console.log(res)
+          if(res.status === 200){
+            this.$message.success(res.statusText)
           }
         }).catch(err=>{
           this.$message.warning(err)
