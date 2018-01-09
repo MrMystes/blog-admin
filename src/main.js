@@ -4,11 +4,16 @@ import Vue from 'vue'
 import Axios from  'axios'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui'
+import {Table,TableColumn,Message,Upload,Button,Pagination,Loading} from 'element-ui'
 import * as utils from './assets/js/utils'
-import 'element-ui/lib/theme-default/index.css'
 
-Vue.use(ElementUI)
+Vue.use(Table)
+Vue.use(Upload)
+Vue.use(Button)
+Vue.use(Pagination)
+Vue.use(Loading.directive)
+Vue.use(TableColumn)
+Vue.prototype.$message = Message
 
 var instance = Axios.create({
   baseURL: 'http://api.ayuki.ink/'
