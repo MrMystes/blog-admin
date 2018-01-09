@@ -30,7 +30,7 @@
       <div class="right">
         <!-- TODO post markdown -->
         <div class="mdContent markdown-body" v-html="article.content" v-if="!showUpload"></div>
-        <el-upload class="upload" v-else drag action="http://106.14.205.89:8080/posts/md2html" multiple :on-error="handleError" :on-success="handleSuccess">
+        <el-upload class="upload" v-else drag action="http://api.ayuki.ink/posts/md2html" multiple :on-error="handleError" :on-success="handleSuccess">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将mark down文件拖到此处，或
             <em>点击上传</em>
