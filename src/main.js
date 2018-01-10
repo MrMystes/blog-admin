@@ -4,7 +4,7 @@ import Vue from 'vue'
 import Axios from  'axios'
 import App from './App'
 import router from './router'
-import {Table,TableColumn,Message,Upload,Button,Pagination,Loading} from 'element-ui'
+import {Table,TableColumn,Message,Upload,Button,Pagination,Loading,MessageBox} from 'element-ui'
 import * as utils from './assets/js/utils'
 
 Vue.use(Table)
@@ -14,6 +14,10 @@ Vue.use(Pagination)
 Vue.use(Loading.directive)
 Vue.use(TableColumn)
 Vue.prototype.$message = Message
+Vue.prototype.$msgbox = MessageBox
+Vue.prototype.$alert = MessageBox.alert
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$prompt = MessageBox.prompt
 
 var instance = Axios.create({
   baseURL: 'http://api.ayuki.ink/'
